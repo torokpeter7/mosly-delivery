@@ -25,7 +25,17 @@ function getCurrentUser() {
 
 function getStartPointValue() {
   const input = document.getElementById('routeStartPoint');
-  return (input?.value || 'Baja, Orgona utca 2').trim();
+  const fallback = 'Baja, Orgona utca 2';
+
+  if (input && input.value && input.value.trim()) {
+    return input.value.trim();
+  }
+
+  if (navigationState.currentPosition) {
+    return `${navigationState.currentPosition.lat.toFixed(5)}, ${navigationState.currentPosition.lon.toFixed(5)}`;
+  }
+
+  return fallback;
 }
 
 function setText(id, value) {
@@ -166,40 +176,56 @@ async function getCourierShipments() {
   const user = getCurrentUser();
   if (!user?.id) return [];
 
-  let { data, error } = await supabase
+  const direct = await supabase
     .from('shipments')
     .select('*')
     .eq('courier_id', user.id)
     .neq('status', 'delivered')
     .order('created_at', { ascending: true });
 
-  if (error) {
-    console.error('Futár csomagok lekérdezése sikertelen:', error);
+  if (!direct.error && direct.data && direct.data.length) {
+    return direct.data;
+  }
+
+  const byEmail = user.email
+    ? await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', user.email)
+        .maybeSingle()
+    : { data: null };
+
+  const fallbackUserId = byEmail?.data?.id || user.id;
+
+  const fallback = await supabase
+    .from('shipments')
+    .select('*')
+    .eq('courier_id', fallbackUserId)
+    .neq('status', 'delivered')
+    .order('created_at', { ascending: true });
+
+  if (!fallback.error && fallback.data && fallback.data.length) {
+    return fallback.data;
+  }
+
+  const claimed = await claimPendingShipments();
+  if (!claimed.length) {
     return [];
   }
 
-  if (!data || !data.length) {
-    const claimed = await claimPendingShipments();
-    if (!claimed.length) {
-      return [];
-    }
+  const assigned = await supabase
+    .from('shipments')
+    .select('*')
+    .eq('courier_id', fallbackUserId)
+    .neq('status', 'delivered')
+    .order('created_at', { ascending: true });
 
-    const { data: reassignedData, error: reassignedError } = await supabase
-      .from('shipments')
-      .select('*')
-      .eq('courier_id', user.id)
-      .neq('status', 'delivered')
-      .order('created_at', { ascending: true });
-
-    if (reassignedError) {
-      console.error('Újra hozzárendelt futár csomagok lekérdezése sikertelen:', reassignedError);
-      return [];
-    }
-
-    return reassignedData || [];
+  if (assigned.error) {
+    console.error('Újra hozzárendelt csomagok lekérdezése hibás:', assigned.error);
+    return [];
   }
 
-  return data || [];
+  return assigned.data || [];
 }
 
 function sortStopsByDistance(stops, startCoords) {
@@ -452,12 +478,60 @@ function startGpsTracking() {
     navigator.geolocation.clearWatch(navigationState.watchId);
   }
 
+  const positionRequest = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        navigationState.currentPosition = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
+
+        const input = document.getElementById('routeStartPoint');
+        if (input && (!input.value || !input.value.trim())) {
+          input.value = `${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`;
+        }
+
+        if (navigationState.route.length) {
+          const currentStop = navigationState.route[navigationState.currentStopIndex];
+          if (currentStop?.coords) {
+            const distanceKm = haversineKm(
+              navigationState.currentPosition.lat,
+              navigationState.currentPosition.lon,
+              currentStop.coords.lat,
+              currentStop.coords.lon
+            );
+
+            if (distanceKm < 0.05) {
+              markCurrentStopDelivered();
+            }
+          }
+        }
+
+        updateNextStopVisual();
+        drawMap();
+      },
+      (error) => {
+        console.warn('GPS hiba:', error);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 10000,
+        timeout: 20000
+      }
+    );
+  };
+
+  positionRequest();
+
   navigationState.watchId = navigator.geolocation.watchPosition(
     (position) => {
       navigationState.currentPosition = {
         lat: position.coords.latitude,
         lon: position.coords.longitude
       };
+
+      const input = document.getElementById('routeStartPoint');
+      input.value = `${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`;
 
       if (navigationState.route.length) {
         const currentStop = navigationState.route[navigationState.currentStopIndex];

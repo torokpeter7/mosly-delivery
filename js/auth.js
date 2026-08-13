@@ -16,6 +16,32 @@ function redirectByRole(role) {
   window.location.href = 'dashboard.html';
 }
 
+async function repairCourierAssignmentMismatch(email, authUserId) {
+  if (!email || !authUserId || !isSupabaseConfigured()) return;
+
+  const { data: profileByEmail, error: profileLookupError } = await supabase
+    .from('profiles')
+    .select('id, email, role')
+    .eq('email', email)
+    .maybeSingle();
+
+  if (profileLookupError) {
+    console.warn('Profil keresés hiba:', profileLookupError);
+    return;
+  }
+
+  if (!profileByEmail || profileByEmail.id === authUserId) return;
+
+  const { error: updateError } = await supabase
+    .from('shipments')
+    .update({ courier_id: authUserId, updated_at: new Date().toISOString() })
+    .eq('courier_id', profileByEmail.id);
+
+  if (updateError) {
+    console.warn('Futár-hozzárendelés javítása sikertelen:', updateError);
+  }
+}
+
 export function setupLoginForm() {
   const form = document.getElementById('loginForm');
   const progress = document.getElementById('loginProgress');
@@ -51,9 +77,17 @@ export function setupLoginForm() {
 
       const user = data?.user;
       const userId = user?.id;
-      const profile = userId
+      let profile = userId
         ? await supabase.from('profiles').select('role, full_name, is_active, email').eq('id', userId).maybeSingle()
         : { data: null, error: null };
+
+      if (!profile?.data && user?.email) {
+        profile = await supabase.from('profiles').select('role, full_name, is_active, email, id').eq('email', user.email).maybeSingle();
+      }
+
+      if (userId && user?.email) {
+        await repairCourierAssignmentMismatch(user.email, userId);
+      }
 
       const role = profile?.data?.role || 'mosly_employee';
       const safeUser = {
