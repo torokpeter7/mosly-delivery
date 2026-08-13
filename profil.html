@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY profil és fiókbeállítások." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/auth.js"></script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div style="font-size:0.7rem; letter-spacing:0.12em; opacity:0.7; text-transform:uppercase;">MOSLY</div><strong>Profil</strong></div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="sidebar-link">Kezdőlap</a>
+          <a href="rendelesek.html" class="sidebar-link">Rendelések</a>
+          <a href="uj-rendeles.html" class="sidebar-link">Új rendelés</a>
+          <a href="futar.html" class="sidebar-link">Futár</a>
+          <a href="profil.html" class="sidebar-link active">Profil</a>
+          <a href="#" id="logoutButton" class="sidebar-link">Kijelentkezés</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-topbar">
+          <div class="dashboard-title">
+            <h1>Személyes profil</h1>
+            <p>Fiókadatok és szerepkör kezelése</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="form-grid">
+            <div class="input-group"><label>Teljes név</label><input class="input" id="profileFullName" type="text" readonly /></div>
+            <div class="input-group"><label>E-mail</label><input class="input" id="profileEmail" type="email" readonly /></div>
+            <div class="input-group"><label>Szerepkör</label><input class="input" id="profileRole" type="text" readonly /></div>
+            <div class="input-group"><label>Aktív fiók</label><input class="input" id="profileStatus" type="text" readonly /></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { ensureAuthenticated, setupProfilePage } from './js/auth.js';
+      ensureAuthenticated(['admin', 'mosly_employee', 'courier']);
+      setupProfilePage();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="60" rx="16" fill="#F7F4F1"/>
+  <rect x="8" y="8" width="44" height="44" rx="12" fill="url(#paint0_linear_1_2)"/>
+  <path d="M18 34.5V23.5C18 18.8056 21.8056 15 26.5 15H32.5C37.1944 15 41 18.8056 41 23.5V34.5H18Z" fill="white" fill-opacity="0.96"/>
+  <path d="M22 34.5V25.5H37V34.5H22Z" fill="#1E5C54" fill-opacity="0.32"/>
+  <path d="M24.5 22L27.5 19L31 22.5L35 19L38.5 22.5" stroke="#1E5C54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M51 18H90.5C93.5376 18 96 20.4624 96 23.5V36.5C96 39.5376 93.5376 42 90.5 42H51V18Z" fill="#F3EFEA"/>
+  <path d="M60 18L69 42L78.5 18H60Z" fill="#1E5C54" fill-opacity="0.16"/>
+  <path d="M60 18L69 42L78.5 18H60Z" stroke="#1E5C54" stroke-width="1.2"/>
+  <path d="M127.5 17C130.7 17 133.4 19.7 133.4 22.9V38.5C133.4 41.7 130.7 44.4 127.5 44.4H112.9C109.7 44.4 107 41.7 107 38.5V22.9C107 19.7 109.7 17 112.9 17H127.5Z" fill="#F3EFEA"/>
+  <path d="M117 24H123.5M117 30H123.5M117 36H123.5" stroke="#1E5C54" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M138 18H183.5C186.537 18 189 20.463 189 23.5V36.5C189 39.537 186.537 42 183.5 42H138V18Z" fill="#F3EFEA"/>
+  <path d="M146 18V42M172 18V42" stroke="#1E5C54" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M149 30H169" stroke="#1E5C54" stroke-width="2" stroke-linecap="round"/>
+  <text x="118" y="53" fill="#1A1F24" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.5">MOSLY</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_2" x1="8" y1="8" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E5C54"/>
+      <stop offset="1" stop-color="#163F3B"/>
+    </linearGradient>
+  </defs>
+</svg>

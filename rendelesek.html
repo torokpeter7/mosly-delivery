@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rendelések | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY rendeléseinek kezelése." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/rendelesek.js"></script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div style="font-size:0.7rem; letter-spacing:0.12em; opacity:0.7; text-transform:uppercase;">MOSLY</div><strong>Rendelések</strong></div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="sidebar-link">Kezdőlap</a>
+          <a href="rendelesek.html" class="sidebar-link active">Rendelések</a>
+          <a href="uj-rendeles.html" class="sidebar-link">Új rendelés</a>
+          <a href="futar.html" class="sidebar-link">Futár</a>
+          <a href="profil.html" class="sidebar-link">Profil</a>
+          <a href="#" id="logoutButton" class="sidebar-link">Kijelentkezés</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-topbar">
+          <div class="dashboard-title">
+            <h1>Rendelések</h1>
+            <p>Összes szállítás nyilvántartása</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Szűrők</h2>
+          </div>
+          <form id="shipmentFilters" class="dashboard-form filter-bar" novalidate>
+            <div class="input-group">
+              <label for="filterSearch">Keresés</label>
+              <input class="input" id="filterSearch" type="text" placeholder="Csomagszám vagy név" />
+            </div>
+            <div class="input-group">
+              <label for="filterStatus">Státusz</label>
+              <select id="filterStatus" class="input">
+                <option value="">Összes</option>
+                <option value="order_received">Rendelés felvéve</option>
+                <option value="out_for_delivery">Kiszállítás alatt</option>
+                <option value="courier_on_way">Önhöz tart a futár</option>
+                <option value="delivered">Kiszállítva</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="filterCity">Település</label>
+              <input class="input" id="filterCity" type="text" placeholder="Település" />
+            </div>
+            <div class="input-group">
+              <label for="filterDate">Dátum</label>
+              <input class="input" id="filterDate" type="date" />
+            </div>
+            <button class="btn btn-primary" type="submit">Szűrés</button>
+          </form>
+        </section>
+
+        <section class="panel" style="margin-top: 20px;">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Csomagszám</th>
+                  <th>Név</th>
+                  <th>Település</th>
+                  <th>Telefonszám</th>
+                  <th>Státusz</th>
+                  <th>Létrehozás dátuma</th>
+                </tr>
+              </thead>
+              <tbody id="shipmentsTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { ensureAuthenticated } from './js/auth.js';
+      import { setupOrdersPage } from './js/rendelesek.js';
+      ensureAuthenticated(['admin', 'mosly_employee']);
+      setupOrdersPage();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Szállítási terület | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY szállítási területe Baja és környező települések között." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>MOSLY DELIVERY</span></a>
+        <nav class="site-nav" aria-label="Fő navigáció">
+          <a href="index.html">Főoldal</a>
+          <a href="szolgaltatas.html">Szolgáltatás</a>
+          <a href="szallitasi-terulet.html">Szállítási terület</a>
+          <a href="csomagkovetes.html">Csomagkövetés</a>
+          <a href="kapcsolat.html">Kapcsolat</a>
+          <a href="bejelentkezes.html" class="nav-cta">Belépés</a>
+        </nav>
+        <button class="mobile-toggle" aria-label="Mobil menü" aria-expanded="false"><span></span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-heading">
+          <span class="section-tag">Szállítási terület</span>
+          <h1>Baja és a környező települések.</h1>
+          <p>A Mosly Delivery helyi hatókörrel dolgozik, így a kiszállítás gyors, pontos és kiszámítható marad a környékbeli településekre.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container location-grid">
+          <article class="location-card"><h3><span class="map-dot"></span>Baja</h3><p>Városközpont, lakóövezetek, nagyobb ingatlanok és üzleti körzetek.</p></article>
+          <article class="location-card"><h3><span class="map-dot"></span>Bácsalmás</h3><p>Közeli település, szoros, napi ügyintézés és időben történő kiszállítás.</p></article>
+          <article class="location-card"><h3><span class="map-dot"></span>Tompa</h3><p>Helyi kiszállítás a település egész területén, rövid és pontos futárutasításokkal.</p></article>
+          <article class="location-card"><h3><span class="map-dot"></span>Szeremle</h3><p>A környékbeli közösségi célokhoz igazított megbízható kézbesítés.</p></article>
+          <article class="location-card"><h3><span class="map-dot"></span>Érsekcsanád</h3><p>Biztonságos és gyors kiszállítás, a környéken élőknek.</p></article>
+          <article class="location-card"><h3><span class="map-dot"></span>Gara</h3><p>Várhatóan mobil és praktikus kézbesítés az okos házhozszállítással.</p></article>
+        </div>
+      </section>
+
+      <section class="section premium-band">
+        <div class="container split-layout">
+          <div>
+            <span class="section-tag">Mire számíthatsz?</span>
+            <h2 style="margin-top: 16px; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.04em;">Kiszámítható, helyi és megbízható.</h2>
+            <ul class="link-list">
+              <li>Másnapi kézbesítés az éjfélig leadott rendelésekhez.</li>
+              <li>Jól megtervezett futárutak helyi és környező településeken.</li>
+              <li>Nyomon követhető, strukturált kiszállítási folyamat.</li>
+              <li>Ügyfélorientált támogatás és kommunikáció.</li>
+            </ul>
+          </div>
+          <div class="content-panel">
+            <div class="farewell">
+              <h3 style="margin:0 0 12px;">Kérdésed van a szállítási körzettel kapcsolatban?</h3>
+              <p style="margin:0; color: rgba(255,255,255,0.82);">Írj nekünk a kapcsolatfelvételi űrlapon, és segítünk a legjobb lehetőséggel.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-bottom">
+        <span>© 2026 MOSLY DELIVERY</span>
+        <span>Minden jog fenntartva.</span>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupNavigation } from './js/main.js';
+      setupNavigation();
+    </script>
+  </body>
+</html>

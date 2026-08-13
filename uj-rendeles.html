@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Új rendelés | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY új rendelés rögzítése." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/supabase.js"></script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div style="font-size:0.7rem; letter-spacing:0.12em; opacity:0.7; text-transform:uppercase;">MOSLY</div><strong>Új rendelés</strong></div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="sidebar-link">Kezdőlap</a>
+          <a href="rendelesek.html" class="sidebar-link">Rendelések</a>
+          <a href="uj-rendeles.html" class="sidebar-link active">Új rendelés</a>
+          <a href="futar.html" class="sidebar-link">Futár</a>
+          <a href="profil.html" class="sidebar-link">Profil</a>
+          <a href="#" id="logoutButton" class="sidebar-link">Kijelentkezés</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-topbar">
+          <div class="dashboard-title">
+            <h1>Új rendelés</h1>
+            <p>Új kiszállítás rögzítése</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <form id="newShipmentForm" class="form-grid dashboard-form" novalidate>
+            <div class="input-group"><label for="customer_name">Név</label><input class="input" id="customer_name" name="customer_name" type="text" required /></div>
+            <div class="input-group"><label for="customer_email">E-mail cím</label><input class="input" id="customer_email" name="customer_email" type="email" required /></div>
+            <div class="input-group"><label for="customer_phone">Telefonszám</label><input class="input" id="customer_phone" name="customer_phone" type="tel" required /></div>
+            <div class="input-group"><label for="postal_code">Irányítószám</label><input class="input" id="postal_code" name="postal_code" type="text" required /></div>
+            <div class="input-group"><label for="city">Település</label><input class="input" id="city" name="city" type="text" required /></div>
+            <div class="input-group"><label for="street">Utca</label><input class="input" id="street" name="street" type="text" required /></div>
+            <div class="input-group"><label for="house_number">Házszám</label><input class="input" id="house_number" name="house_number" type="text" required /></div>
+            <div class="input-group full-width"><label for="notes">Megjegyzés</label><textarea id="notes" name="notes" class="input" rows="5"></textarea></div>
+            <div class="full-width inline-actions">
+              <button class="btn btn-primary" type="submit">RENDELÉS ELKÜLDÉSE</button>
+            </div>
+          </form>
+          <div id="newShipmentMessage" class="alert" role="status" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { ensureAuthenticated } from './js/auth.js';
+      import { setupNewShipmentForm } from './js/uj-rendeles.js';
+      ensureAuthenticated(['admin', 'mosly_employee']);
+      setupNewShipmentForm();
+    </script>
+  </body>
+</html>

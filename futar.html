@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Futár | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY futári felület." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/futar.js"></script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><div style="font-size:0.7rem; letter-spacing:0.12em; opacity:0.7; text-transform:uppercase;">MOSLY</div><strong>Futár</strong></div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="sidebar-link">Kezdőlap</a>
+          <a href="rendelesek.html" class="sidebar-link">Rendelések</a>
+          <a href="uj-rendeles.html" class="sidebar-link">Új rendelés</a>
+          <a href="futar.html" class="sidebar-link active">Futár</a>
+          <a href="profil.html" class="sidebar-link">Profil</a>
+          <a href="#" id="logoutButton" class="sidebar-link">Kijelentkezés</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-topbar">
+          <div class="dashboard-title">
+            <h1>Mai kiszállítások</h1>
+            <p>Aktuális útvonal és ügyféladatok</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="form-grid">
+            <div class="input-group" style="flex: 1 1 320px;">
+              <label for="routeStartPoint">Futár indulási pont</label>
+              <input class="input" id="routeStartPoint" name="routeStartPoint" type="text" value="Baja, Orgona utca 2" placeholder="pl. Baja, Orgona utca 2" />
+            </div>
+            <div class="input-group" style="align-self: end;">
+              <button class="btn btn-primary" id="routeOptimizeButton" type="button">ÚTVONAL TERVEZÉSE</button>
+              <a class="btn btn-secondary" id="googleMapsRouteButton" href="#" target="_blank" rel="noreferrer" style="display: inline-block; margin-top: 12px;">GOOGLE MAPS ÚTVONAL</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Csomagszám</th>
+                  <th>Név</th>
+                  <th>Telefonszám</th>
+                  <th>Cím</th>
+                  <th>Megjegyzés</th>
+                  <th>Státusz</th>
+                  <th>Műveletek</th>
+                </tr>
+              </thead>
+              <tbody id="courierShipmentsTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { ensureAuthenticated } from './js/auth.js';
+      import { setupCourierPage } from './js/futar.js';
+      ensureAuthenticated(['admin', 'mosly_employee', 'courier']);
+      setupCourierPage();
+    </script>
+  </body>
+</html>

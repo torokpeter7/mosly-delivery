@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOSLY DELIVERY | Éjfélig rendelsz, másnap házhoz viszünk.</title>
+    <meta name="description" content="MOSLY DELIVERY – modern helyi másnapi csomagkiszállítás Baja környékén. Éjfélig rendelsz, másnap házhoz viszünk." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="brand" aria-label="Mosly Delivery kezdőlap">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/>
+              <path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/>
+              <path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>MOSLY DELIVERY</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Fő navigáció">
+          <a href="#bemutatkozas">Bemutatkozás</a>
+          <a href="#mukodes">Hogyan működik?</a>
+          <a href="#szallitasi-terulet">Szállítási terület</a>
+          <a href="csomagkovetes.html">Csomagkövetés</a>
+          <a href="kapcsolat.html">Kapcsolat</a>
+          <a href="bejelentkezes.html" class="nav-cta">Belépés</a>
+        </nav>
+
+        <button class="mobile-toggle" aria-label="Mobil menü" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Helyi, gyors és megbízható</span>
+            <h1>Éjfélig rendelsz,<br />másnap házhoz visszük.</h1>
+            <p>
+              A MOSLY DELIVERY a Baja környéki mosólapok kiszállítására épült modern szolgáltatás.
+              Rendelj még ma este, és másnap reggelre a kiválasztott településen a lakásodhoz szállítjuk a csomagot.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="csomagkovetes.html">CSOMAG KÖVETÉSE</a>
+              <a class="btn btn-secondary" href="#szallitasi-terulet">Szállítási terület</a>
+            </div>
+            <div class="hero-meta">
+              <div>
+                <strong>24h</strong>
+                rendelés leadási lehetőség
+              </div>
+              <div>
+                <strong>+12</strong>
+                település a környéken
+              </div>
+              <div>
+                <strong>98%</strong>
+                pontossági mutató
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Szállítási szemléltetés">
+            <div class="delivery-showcase">
+              <div class="showcase-graph"></div>
+              <div class="info-pill glass-card">
+                <div class="small">Másnapi kiszállítás</div>
+                <strong>Baja környékén</strong>
+              </div>
+              <div class="metric-card glass-card">
+                <strong>14:00</strong>
+                <span class="muted">délutáni csomagok<br />rendezése</span>
+              </div>
+              <div class="package-box">
+                <div class="box-label">
+                  <span>Csomag</span>
+                  <span>MSL-8F42K9</span>
+                </div>
+                <div class="box-tile">MOSLY</div>
+                <div class="status-line">
+                  <span>Aktuális státusz</span>
+                  <span class="status-badge">Kiszállítás alatt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section premium-band" id="bemutatkozas">
+        <div class="container">
+          <div class="title-wrap">
+            <span class="section-tag">Bemutatkozás</span>
+            <h2>Modern kiszállítás a Mosly minőségi csomagjaihoz.</h2>
+          </div>
+          <div class="grid-3">
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2V8M9.5 4.5L12 2L14.5 4.5M4.5 12.5H19.5M7 18H17C18.657 18 20 16.657 20 15V12.5H4V15C4 16.657 5.343 18 7 18Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>Előre tervezett nap</h3>
+              <p>Az éjfélig leadott rendelések a következő napon már úton vannak, így nincs felesleges várakozás.</p>
+            </article>
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 21C16.4183 21 20 17.4183 20 13C20 8.58172 16.4183 5 12 5C7.58172 5 4 8.58172 4 13C4 17.4183 7.58172 21 12 21ZM12 8V13L15.5 15.5M19 7L21 5M5 7L3 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>Biztonságos nyomon követés</h3>
+              <p>Valós idejű csomagstátuszokkal közvetlenül ellenőrizheted a szállítás aktuális állapotát.</p>
+            </article>
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M10 19.5L4.5 14L7 11.5L10 14.5L17 7.5L19.5 10L10 19.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h3>Házhoz szállítás</h3>
+              <p>Olyan területeken dolgozunk, ahol a helyi kiszállítás gyors, kényelmes és megbízható marad.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="mukodes">
+        <div class="container split-layout">
+          <div>
+            <span class="section-tag">Hogyan működik?</span>
+            <h2 style="margin-top: 16px; font-size: clamp(2.1rem, 4vw, 3.3rem); letter-spacing: -0.05em;">Rendelés, futár és kézbesítés egyszerűen.</h2>
+            <ol class="steps-list">
+              <li>
+                <span class="step-no">1</span>
+                <div>
+                  <h4>Rendelés leadása</h4>
+                  <p>Az adott estén 00:00 óráig leadhatod a rendelést, hogy a következő napra bekerüljön a kiszállítási körforgásba.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-no">2</span>
+                <div>
+                  <h4>Feldolgozás</h4>
+                  <p>A Mosly csapata rögzíti a rendelést, csomagszámot generál, és elküldi a futárnak a szállítási adatokkal.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-no">3</span>
+                <div>
+                  <h4>Kiszállítás másnap</h4>
+                  <p>A csomag a megadott címen, Baja és környező településekre történő helyi kiszállítással érkezik a címzetthez.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="process-figure">
+            <div class="route-visual" aria-label="Futár útvonal képe">
+              <div class="location-pin pin-1">Baja</div>
+              <div class="location-pin pin-2">Bácsalmás</div>
+              <div class="location-pin pin-3">Tompa</div>
+              <div class="location-pin pin-4">Szeremle</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="szallitasi-terulet">
+        <div class="container">
+          <div class="title-wrap">
+            <span class="section-tag">Szállítási terület</span>
+            <h2>Helyi kiszállítás Baja és környező településekre.</h2>
+          </div>
+
+          <div class="location-grid">
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Baja</h3>
+              <p>Városközpont, külterületi lakóövezetek és vállalati körzetek.</p>
+            </article>
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Bácsalmás</h3>
+              <p>Közeli településre történő napi futárszolgáltatás.</p>
+            </article>
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Tompa</h3>
+              <p>Helyi, precíz és időben tervezett kiszállítás.</p>
+            </article>
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Szeremle</h3>
+              <p>Rugalmas kézbesítés és kényelmes ügyintézés.</p>
+            </article>
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Érsekcsanád</h3>
+              <p>Helyi csomagokban a megbízhatóság az elsődleges.</p>
+            </article>
+            <article class="location-card">
+              <h3><span class="map-dot"></span>Gara</h3>
+              <p>Gyors és kényelmes helyi szállítási pontok a környéken.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="tracking-box">
+            <span class="section-tag">Csomagkövetés</span>
+            <h2 style="margin-top: 16px; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.04em;">Csomagkövetés</h2>
+            <p class="muted">Írd be a csomagszámodat, és nézd meg a legfrissebb állapotát.</p>
+
+            <form class="tracking-form" id="trackingForm" novalidate>
+              <input class="input" type="text" id="trackingInput" name="tracking_number" placeholder="MSL-XXXXXXXX" aria-label="Csomagszám" />
+              <button class="btn btn-primary" type="submit">CSOMAG KÖVETÉSE</button>
+            </form>
+
+            <div id="trackingStatus" class="alert" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="title-wrap">
+            <span class="section-tag">Miért minket választasz?</span>
+            <h2>Prémium kiszállítási élmény a helyi igényekhez szabva.</h2>
+          </div>
+          <div class="grid-3">
+            <article class="info-card">
+              <h3>Hosszú távú megbízhatóság</h3>
+              <p>Rendszeres, kiszámítható és felelősségteljes kiszállítás a Baja környéki településeken.</p>
+            </article>
+            <article class="info-card">
+              <h3>Világos kommunikáció</h3>
+              <p>Az ügyfél a csomagkövetésben mindig látja a legfrissebb statuszt, és a futár utólag is nyomon követhető.</p>
+            </article>
+            <article class="info-card">
+              <h3>Mobilbarát élmény</h3>
+              <p>Az összes folyamatok minimális kattintással és gyorsan érzékelhetőek, akár telefonról is.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="brand" aria-label="MOSLY DELIVERY logo">
+              <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/>
+                  <path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/>
+                  <path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>MOSLY DELIVERY</span>
+            </a>
+            <p style="margin-top: 18px; max-width: 320px;">Háztól-házig szolgáltatás Baja és környékén – modern, gyors és felelősségteljes csomagkiszállítás.</p>
+          </div>
+
+          <div>
+            <h4>Oldalak</h4>
+            <ul>
+              <li><a href="index.html">Főoldal</a></li>
+              <li><a href="szolgaltatas.html">Szolgáltatás</a></li>
+              <li><a href="szallitasi-terulet.html">Szállítási terület</a></li>
+              <li><a href="csomagkovetes.html">Csomagkövetés</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Információ</h4>
+            <ul>
+              <li><a href="kapcsolat.html">Kapcsolat</a></li>
+              <li><a href="bejelentkezes.html">Bejelentkezés</a></li>
+              <li><a href="404.html">404 oldal</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Kapcsolat</h4>
+            <ul>
+              <li>Baja, Magyarország</li>
+              <li>+36 20 123 4567</li>
+              <li>info@moslydelivery.hu</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© 2026 MOSLY DELIVERY</span>
+          <span>Minden jog fenntartva.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupNavigation } from './js/main.js';
+      setupNavigation();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Csomagkövetés | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY csomagkövető – kövesd a küldeményed státuszát a csomagszámmal." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/csomagkovetes.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>MOSLY DELIVERY</span></a>
+        <nav class="site-nav" aria-label="Fő navigáció">
+          <a href="index.html">Főoldal</a>
+          <a href="szolgaltatas.html">Szolgáltatás</a>
+          <a href="szallitasi-terulet.html">Szállítási terület</a>
+          <a href="csomagkovetes.html">Csomagkövetés</a>
+          <a href="kapcsolat.html">Kapcsolat</a>
+          <a href="bejelentkezes.html" class="nav-cta">Belépés</a>
+        </nav>
+        <button class="mobile-toggle" aria-label="Mobil menü" aria-expanded="false"><span></span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-heading">
+          <span class="section-tag">Csomagkövetés</span>
+          <h1>Csomagkövetés</h1>
+          <p>Írd be a csomagszámodat, és nézd meg a csomag aktuális állapotát és a státusz történetét.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container" style="max-width: 780px;">
+          <div class="tracking-box">
+            <form id="trackingForm" class="tracking-form" novalidate>
+              <input class="input" type="text" id="trackingInput" name="tracking_number" placeholder="MSL-XXXXXXXX" aria-label="Csomagszám" />
+              <button class="btn btn-primary" type="submit">CSOMAG KÖVETÉSE</button>
+            </form>
+            <div id="trackingStatus" class="alert" role="status" aria-live="polite"></div>
+            <div id="trackingResult" class="hidden" style="margin-top: 22px;">
+              <div class="content-panel">
+                <div style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 18px;">
+                  <h3 style="margin:0;">Csomag adatai</h3>
+                  <span id="statusBadge" class="badge badge-neutral">-</span>
+                </div>
+                <div class="form-grid">
+                  <div class="input-group">
+                    <label>Csomagszám</label>
+                    <input class="input" id="trackingNumber" readonly />
+                  </div>
+                  <div class="input-group">
+                    <label>Aktuális státusz</label>
+                    <input class="input" id="trackingStatusValue" readonly />
+                  </div>
+                  <div class="input-group full-width">
+                    <label>Státusz időpontja</label>
+                    <input class="input" id="trackingUpdatedAt" readonly />
+                  </div>
+                  <div class="input-group full-width">
+                    <label>Státusz történet</label>
+                    <textarea id="trackingHistory" readonly></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-bottom">
+        <span>© 2026 MOSLY DELIVERY</span>
+        <span>Minden jog fenntartva.</span>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupNavigation } from './js/main.js';
+      setupNavigation();
+    </script>
+  </body>
+</html>

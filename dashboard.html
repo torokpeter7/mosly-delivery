@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY belső kezelőfelület." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+  </head>
+  <body class="dashboard-body">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar">
+        <div class="sidebar-brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div>
+            <div style="font-size:0.7rem; letter-spacing:0.12em; opacity:0.7; text-transform:uppercase;">MOSLY</div>
+            <strong>Admin</strong>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Műszerfal menü">
+          <a href="dashboard.html" class="sidebar-link active">Kezdőlap</a>
+          <a href="rendelesek.html" class="sidebar-link">Rendelések</a>
+          <a href="uj-rendeles.html" class="sidebar-link">Új rendelés</a>
+          <a href="futar.html" class="sidebar-link">Futár</a>
+          <a href="profil.html" class="sidebar-link">Profil</a>
+          <a href="#" id="logoutButton" class="sidebar-link">Kijelentkezés</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-topbar">
+          <div class="dashboard-title">
+            <h1>Dashboard</h1>
+            <p>Ügyfél- és szállítási áttekintés</p>
+          </div>
+          <div class="dashboard-actions">
+            <div class="avatar" id="userAvatar">A</div>
+            <div>
+              <strong id="userName">Admin</strong>
+            </div>
+          </div>
+        </div>
+
+        <section class="summary-grid">
+          <article class="summary-card">
+            <div class="label">Összes rendelés</div>
+            <strong id="statsTotal">0</strong>
+            <div class="detail"><span>Mai</span><span id="statsToday">0</span></div>
+          </article>
+          <article class="summary-card">
+            <div class="label">Kiszállítás alatt</div>
+            <strong id="statsOutForDelivery">0</strong>
+            <div class="detail"><span>Aktív</span><span>0</span></div>
+          </article>
+          <article class="summary-card">
+            <div class="label">Kézbesítve</div>
+            <strong id="statsDelivered">0</strong>
+            <div class="detail"><span>Hónap</span><span id="statsMonth">0</span></div>
+          </article>
+          <article class="summary-card">
+            <div class="label">Futárok</div>
+            <strong id="statsCouriers">0</strong>
+            <div class="detail"><span>Aktív</span><span>0</span></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel">
+            <div class="panel-header">
+              <h2>Legutóbbi rendelések</h2>
+              <a href="rendelesek.html" class="text-link">Összes megtekintése</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Csomagszám</th>
+                    <th>Név</th>
+                    <th>Település</th>
+                    <th>Státusz</th>
+                    <th>Dátum</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardRecentTable"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <aside class="panel">
+            <div class="panel-header">
+              <h2>Gyors műveletek</h2>
+            </div>
+            <div class="list-stack">
+              <div class="list-item"><span>Új rendelés felvétele</span><a class="text-link" href="uj-rendeles.html">Megnyitás</a></div>
+              <div class="list-item"><span>Rendelések listázása</span><a class="text-link" href="rendelesek.html">Megnyitás</a></div>
+              <div class="list-item"><span>Futár nézet</span><a class="text-link" href="futar.html">Megnyitás</a></div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script type="module">
+      import { ensureAuthenticated } from './js/auth.js';
+      import { setupDashboardPage } from './js/dashboard.js';
+      ensureAuthenticated(['admin', 'mosly_employee']);
+      setupDashboardPage();
+    </script>
+  </body>
+</html>

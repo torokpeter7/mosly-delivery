@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kapcsolat | MOSLY DELIVERY</title>
+    <meta name="description" content="Kapcsolatfelvétel a MOSLY DELIVERY csapatával." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15V8.5C5 6.567 6.567 5 8.5 5H15.5C17.433 5 19 6.567 19 8.5V15H5Z" fill="white"/><path d="M7.5 15V10.5H16.5V15H7.5Z" fill="#1E5C54" fill-opacity="0.3"/><path d="M8.5 8.2L10.6 6.5L12.4 8.5L14.6 6.5L16.5 8.2" stroke="#1E5C54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>MOSLY DELIVERY</span></a>
+        <nav class="site-nav" aria-label="Fő navigáció">
+          <a href="index.html">Főoldal</a>
+          <a href="szolgaltatas.html">Szolgáltatás</a>
+          <a href="szallitasi-terulet.html">Szállítási terület</a>
+          <a href="csomagkovetes.html">Csomagkövetés</a>
+          <a href="kapcsolat.html">Kapcsolat</a>
+          <a href="bejelentkezes.html" class="nav-cta">Belépés</a>
+        </nav>
+        <button class="mobile-toggle" aria-label="Mobil menü" aria-expanded="false"><span></span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-heading">
+          <span class="section-tag">Kapcsolat</span>
+          <h1>Keress bennünket nyugodtan.</h1>
+          <p>Ha kérdésed van a kiszállítási határidőkkel, szállítási területtel vagy csomagkövetéssel kapcsolatban, írj nekünk.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container contact-grid">
+          <div class="contact-info">
+            <div class="info-card">
+              <strong>Elérhetőség</strong>
+              <p>info@moslydelivery.hu</p>
+            </div>
+            <div class="info-card">
+              <strong>Telefon</strong>
+              <p>+36 20 123 4567</p>
+            </div>
+            <div class="info-card">
+              <strong>Székhely</strong>
+              <p>Baja, Magyarország</p>
+            </div>
+          </div>
+
+          <div class="content-panel">
+            <form class="form-grid" id="contactForm" novalidate>
+              <div class="input-group">
+                <label for="name">Név</label>
+                <input class="input" id="name" name="name" type="text" placeholder="Név" />
+              </div>
+              <div class="input-group">
+                <label for="email">E-mail</label>
+                <input class="input" id="email" name="email" type="email" placeholder="pelda@email.com" />
+              </div>
+              <div class="input-group full-width">
+                <label for="message">Üzenet</label>
+                <textarea id="message" name="message" placeholder="Miben tudunk segíteni?"></textarea>
+              </div>
+              <div class="full-width">
+                <button class="btn btn-primary" type="submit">ÜZENET KÜLDÉSE</button>
+                <div id="contactStatus" class="alert" role="status" aria-live="polite"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-bottom">
+        <span>© 2026 MOSLY DELIVERY</span>
+        <span>Minden jog fenntartva.</span>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupNavigation, setupContactForm } from './js/main.js';
+      setupNavigation();
+      setupContactForm();
+    </script>
+  </body>
+</html>
