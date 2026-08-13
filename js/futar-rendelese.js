@@ -101,10 +101,47 @@ async function assignCourierToShipment() {
   await loadAssignmentTable();
 }
 
+async function assignAllOrderReceivedToCourier() {
+  if (!isSupabaseConfigured()) return;
+
+  const courierId = document.getElementById('courierSelect')?.value;
+  const nextStatus = document.getElementById('assignmentStatus')?.value || 'out_for_delivery';
+
+  if (!courierId) {
+    setMessage('Kérjük, válassz ki egy futárt a tömeges hozzárendeléshez.', 'error');
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('shipments')
+    .update({
+      courier_id: courierId,
+      status: nextStatus,
+      updated_at: new Date().toISOString()
+    })
+    .eq('status', 'order_received')
+    .select('id');
+
+  if (error) {
+    setMessage(error.message || 'A tömeges futárhoz rendelés sikertelen volt.', 'error');
+    return;
+  }
+
+  const updatedCount = data?.length || 0;
+  setMessage(updatedCount > 0 ? `${updatedCount} db „Rendelés felvéve” státuszú csomag sikeresen futárhoz lett rendelve.` : 'Nincs „Rendelés felvéve” státuszú csomag a hozzárendeléshez.', updatedCount > 0 ? 'success' : 'info');
+  await loadShipments();
+  await loadAssignmentTable();
+}
+
 export function setupCourierAssignmentPage() {
   const button = document.getElementById('assignCourierButton');
   if (button) {
     button.addEventListener('click', assignCourierToShipment);
+  }
+
+  const bulkButton = document.getElementById('assignAllReceivedButton');
+  if (bulkButton) {
+    bulkButton.addEventListener('click', assignAllOrderReceivedToCourier);
   }
 
   loadCouriers();

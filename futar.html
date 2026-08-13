@@ -50,33 +50,15 @@
               <strong id="statsRemainingCount">0</strong>
             </div>
             <div class="summary-card compact">
-              <span class="label">Távolság</span>
-              <strong id="statsDistance">0 km</strong>
-            </div>
-            <div class="summary-card compact">
-              <span class="label">Becsült idő</span>
-              <strong id="statsEta">0 min</strong>
-            </div>
-            <div class="summary-card compact">
               <span class="label">Kézbesítve</span>
               <strong id="statsDeliveredCount">0</strong>
             </div>
           </div>
 
-          <div class="courier-primary-panel">
-            <div class="courier-route-bar">
-              <div>
-                <div class="eyebrow">Mai útvonal</div>
-                <h2 id="routeTitle">Útvonal előkészítése</h2>
-              </div>
-              <button class="btn btn-primary" id="routeStartButton" type="button">▶ ÚTVONAL INDÍTÁSA</button>
-            </div>
-
-            <div class="courier-settings-row">
-              <div class="input-group">
-                <label for="routeStartPoint">Indulási pont</label>
-                <input class="input" id="routeStartPoint" name="routeStartPoint" type="text" value="Baja, Orgona utca 2" placeholder="pl. Baja, Orgona utca 2" />
-              </div>
+          <div class="courier-settings-row">
+            <div class="input-group">
+              <label for="routeStartPoint">Indulási pont</label>
+              <input class="input" id="routeStartPoint" name="routeStartPoint" type="text" value="Baja, Orgona utca 2" placeholder="pl. Baja, Orgona utca 2" />
             </div>
           </div>
 
@@ -89,16 +71,6 @@
             <p class="address-line" id="nextStopAddress">—</p>
             <div class="turn-row">
               <strong id="turnInstruction">—</strong>
-            </div>
-            <div class="distance-grid">
-              <div>
-                <span>Távolság</span>
-                <strong id="nextStopDistance">—</strong>
-              </div>
-              <div>
-                <span>Érkezés</span>
-                <strong id="nextStopEta">—</strong>
-              </div>
             </div>
           </div>
 
@@ -117,13 +89,6 @@
             </select>
           </div>
 
-          <div class="map-card">
-            <div class="map-card-header">
-              <div class="eyebrow">TÉRKÉP</div>
-              <span id="routeStateText">Várakozás</span>
-            </div>
-            <div id="courierMap" aria-label="Futár útvonal térkép"></div>
-          </div>
         </section>
       </main>
     </div>

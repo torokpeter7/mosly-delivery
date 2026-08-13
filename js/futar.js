@@ -15,9 +15,38 @@ const navigationState = {
   routeReady: false
 };
 
-function getCurrentUser() {
+async function getCurrentUser() {
   try {
-    return JSON.parse(localStorage.getItem('mosly-user') || '{}');
+    const saved = JSON.parse(localStorage.getItem('mosly-user') || '{}');
+    if (saved && saved.id && saved.email) {
+      return saved;
+    }
+  } catch (error) {
+    // ignore stale cache
+  }
+
+  if (!isSupabaseConfigured()) return {};
+
+  try {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) return {};
+
+    const { data: profileData } = await supabase
+      .from('profiles')
+      .select('role, full_name, is_active, email')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    const resolved = {
+      id: user.id,
+      email: user.email,
+      full_name: profileData?.full_name || user.email || 'Mosly felhasználó',
+      role: profileData?.role || 'courier',
+      is_active: profileData?.is_active ?? true
+    };
+
+    localStorage.setItem('mosly-user', JSON.stringify(resolved));
+    return resolved;
   } catch (error) {
     return {};
   }
@@ -137,7 +166,7 @@ async function resolveShipmentCoordinates(shipment) {
 async function claimPendingShipments() {
   if (!isSupabaseConfigured()) return [];
 
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user?.id) return [];
 
   const { data, error } = await supabase
@@ -173,7 +202,7 @@ async function claimPendingShipments() {
 async function getCourierShipments() {
   if (!isSupabaseConfigured()) return [];
 
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user?.id) return [];
 
   const direct = await supabase
@@ -351,16 +380,12 @@ function updateNextStopVisual() {
     setText('nextStopName', 'Nincs több megálló');
     setText('nextStopAddress', 'A mai útvonal befejeződött.');
     setText('turnInstruction', 'Kész a nap.');
-    setText('nextStopDistance', '—');
-    setText('nextStopEta', '—');
     document.getElementById('courierStatusChip').textContent = 'Kész';
     return;
   }
 
   const address = `${nextStop.city || ''} ${nextStop.street || ''} ${nextStop.house_number || ''}`.trim();
   const customerName = nextStop.customer_name || 'Ügyfél';
-  let distanceText = '—';
-  let etaText = '—';
   let instructionText = 'Közeli cél.';
 
   if (navigationState.currentPosition && nextStop.coords) {
@@ -378,16 +403,12 @@ function updateNextStopVisual() {
       nextStop.coords.lon
     );
 
-    distanceText = formatDistanceKm(distanceKm);
-    etaText = formatMinutes((distanceKm / 24) * 60);
     instructionText = getTurnInstruction(distanceKm, bearing);
   }
 
   setText('nextStopName', customerName);
   setText('nextStopAddress', address || 'Cím nem található');
   setText('turnInstruction', instructionText);
-  setText('nextStopDistance', distanceText);
-  setText('nextStopEta', etaText);
   setText('routeStateText', navigationState.routeReady ? 'Útvonal aktív' : 'Várakozás');
   document.getElementById('nextStopBadge').textContent = navigationState.routeReady ? 'Következő megálló' : 'Várakozás';
 }
@@ -628,10 +649,16 @@ function bindNavigationControls() {
   });
 }
 
-export function setupCourierPage() {
+export async function setupCourierPage() {
   bindNavigationControls();
   setText('courierGreeting', getGreetingText());
-  rebuildRoute();
+  const user = await getCurrentUser();
+  if (!user?.id) {
+    setText('routeTitle', 'Bejelentkezés szükséges');
+    setText('nextStopName', 'Kérjük, jelentkezzen be.');
+    return;
+  }
+  await rebuildRoute();
 }
 
 if (document.readyState !== 'loading') {
