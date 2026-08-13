@@ -258,6 +258,258 @@ tr:hover td {
   font-weight: 700;
 }
 
+.courier-layout {
+  background: linear-gradient(180deg, #f4f6f8 0%, #eef3f4 100%);
+}
+
+.courier-mobile-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.courier-header,
+.courier-route-bar,
+.map-card-header,
+.navigator-top,
+.distance-grid,
+.courier-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.courier-header {
+  margin-bottom: 8px;
+}
+
+.courier-header h1 {
+  margin: 6px 0 0;
+  font-size: clamp(2.1rem, 6vw, 3rem);
+  letter-spacing: -0.06em;
+}
+
+.courier-status-chip {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(30,92,84,0.1);
+  color: var(--dashboard-primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.courier-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.summary-card.compact {
+  padding: 18px 16px;
+  border-radius: 18px;
+}
+
+.summary-card.compact strong {
+  font-size: 1.3rem;
+}
+
+.courier-primary-panel,
+.navigator-card,
+.map-card,
+.delivery-failure-box {
+  background: #fff;
+  border: 1px solid rgba(18, 28, 35, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(23, 35, 44, 0.06);
+}
+
+.courier-primary-panel,
+.navigator-card,
+.map-card,
+.delivery-failure-box {
+  padding: 18px;
+}
+
+.courier-route-bar {
+  margin-bottom: 18px;
+}
+
+.courier-route-bar h2 {
+  margin: 8px 0 0;
+  font-size: 1.4rem;
+}
+
+.courier-settings-row {
+  margin-top: 6px;
+}
+
+.input-group {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dashboard-muted);
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(27,31,36,0.1);
+  padding: 0 16px;
+  background: rgba(244,246,248,0.82);
+}
+
+.navigator-card {
+  display: grid;
+  gap: 14px;
+}
+
+#nextStopBadge {
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  background: rgba(216,139,42,0.12);
+  color: var(--dashboard-warning);
+  font-weight: 700;
+}
+
+.navigator-card h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+
+.address-line {
+  margin: 0;
+  color: var(--dashboard-muted);
+  font-size: 1.04rem;
+  line-height: 1.5;
+}
+
+.turn-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(30,92,84,0.08);
+  color: var(--dashboard-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.distance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.distance-grid > div {
+  background: rgba(244,246,248,0.9);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.distance-grid span {
+  display: block;
+  color: var(--dashboard-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.distance-grid strong {
+  font-size: 1.1rem;
+}
+
+.courier-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #0f8f67 0%, #0d7a58 100%);
+  color: white;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #d95353 0%, #b83e3e 100%);
+  color: white;
+}
+
+#courierMap {
+  width: 100%;
+  height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.map-card-header {
+  margin-bottom: 6px;
+}
+
+.delivery-failure-box {
+  display: grid;
+  gap: 10px;
+}
+
+.delivery-failure-box label {
+  color: var(--dashboard-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+@media (max-width: 960px) {
+  .dashboard-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar {
+    position: relative;
+    height: auto;
+  }
+
+  .dashboard-main {
+    padding: 18px 14px 48px;
+  }
+}
+
+@media (max-width: 560px) {
+  .courier-summary-grid,
+  .courier-actions,
+  .distance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .courier-route-bar,
+  .courier-header,
+  .map-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .courier-route-bar .btn {
+    width: 100%;
+  }
+
+  #courierMap {
+    height: 260px;
+  }
+}
+
 .btn-primary-small {
   background: linear-gradient(135deg, var(--dashboard-primary) 0%, var(--dashboard-primary-strong) 100%);
   color: white;

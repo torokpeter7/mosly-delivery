@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Futár | MOSLY DELIVERY</title>
-    <meta name="description" content="MOSLY DELIVERY futári felület." />
+    <title>Futár navigáció | MOSLY DELIVERY</title>
+    <meta name="description" content="MOSLY DELIVERY futári navigáció és kézbesítési felület." />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <script type="module" src="js/supabase.js"></script>
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="js/futar.js"></script>
   </head>
   <body class="dashboard-body">
@@ -28,43 +30,99 @@
         </nav>
       </aside>
 
-      <main class="dashboard-main">
-        <div class="dashboard-topbar">
-          <div class="dashboard-title">
-            <h1>Mai kiszállítások</h1>
-            <p>Aktuális útvonal és ügyféladatok</p>
-          </div>
-        </div>
-
-        <section class="panel">
-          <div class="form-grid">
-            <div class="input-group" style="flex: 1 1 320px;">
-              <label for="routeStartPoint">Futár indulási pont</label>
-              <input class="input" id="routeStartPoint" name="routeStartPoint" type="text" value="Baja, Orgona utca 2" placeholder="pl. Baja, Orgona utca 2" />
+      <main class="dashboard-main courier-layout">
+        <section class="courier-mobile-shell">
+          <div class="courier-header">
+            <div>
+              <div class="eyebrow">MOSLY</div>
+              <h1 id="courierGreeting">Jó reggelt!</h1>
             </div>
-            <div class="input-group" style="align-self: end;">
-              <button class="btn btn-primary" id="routeOptimizeButton" type="button">ÚTVONAL TERVEZÉSE</button>
-              <a class="btn btn-secondary" id="googleMapsRouteButton" href="#" target="_blank" rel="noreferrer" style="display: inline-block; margin-top: 12px;">GOOGLE MAPS ÚTVONAL</a>
+            <div class="courier-status-chip" id="courierStatusChip">Útvonal készen</div>
+          </div>
+
+          <div class="courier-summary-grid">
+            <div class="summary-card compact">
+              <span class="label">Mai csomagok</span>
+              <strong id="statsTodayCount">0</strong>
+            </div>
+            <div class="summary-card compact">
+              <span class="label">Hátralévő</span>
+              <strong id="statsRemainingCount">0</strong>
+            </div>
+            <div class="summary-card compact">
+              <span class="label">Távolság</span>
+              <strong id="statsDistance">0 km</strong>
+            </div>
+            <div class="summary-card compact">
+              <span class="label">Becsült idő</span>
+              <strong id="statsEta">0 min</strong>
+            </div>
+            <div class="summary-card compact">
+              <span class="label">Kézbesítve</span>
+              <strong id="statsDeliveredCount">0</strong>
             </div>
           </div>
-        </section>
 
-        <section class="panel">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Csomagszám</th>
-                  <th>Név</th>
-                  <th>Telefonszám</th>
-                  <th>Cím</th>
-                  <th>Megjegyzés</th>
-                  <th>Státusz</th>
-                  <th>Műveletek</th>
-                </tr>
-              </thead>
-              <tbody id="courierShipmentsTable"></tbody>
-            </table>
+          <div class="courier-primary-panel">
+            <div class="courier-route-bar">
+              <div>
+                <div class="eyebrow">Mai útvonal</div>
+                <h2 id="routeTitle">Útvonal előkészítése</h2>
+              </div>
+              <button class="btn btn-primary" id="routeStartButton" type="button">▶ ÚTVONAL INDÍTÁSA</button>
+            </div>
+
+            <div class="courier-settings-row">
+              <div class="input-group">
+                <label for="routeStartPoint">Indulási pont</label>
+                <input class="input" id="routeStartPoint" name="routeStartPoint" type="text" value="Baja, Orgona utca 2" placeholder="pl. Baja, Orgona utca 2" />
+              </div>
+            </div>
+          </div>
+
+          <div class="navigator-card">
+            <div class="navigator-top">
+              <div class="eyebrow">KÖVETKEZŐ CÍM</div>
+              <div id="nextStopBadge">Várakozás</div>
+            </div>
+            <h3 id="nextStopName">Kérjük, indítsa el az útvonalat.</h3>
+            <p class="address-line" id="nextStopAddress">—</p>
+            <div class="turn-row">
+              <strong id="turnInstruction">—</strong>
+            </div>
+            <div class="distance-grid">
+              <div>
+                <span>Távolság</span>
+                <strong id="nextStopDistance">—</strong>
+              </div>
+              <div>
+                <span>Érkezés</span>
+                <strong id="nextStopEta">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="courier-actions">
+            <button class="btn btn-success" id="markDeliveredButton" type="button">✓ KÉZBESÍTVE</button>
+            <button class="btn btn-danger" id="markFailedButton" type="button">✕ NEM SIKERÜLT</button>
+          </div>
+
+          <div class="delivery-failure-box">
+            <label for="deliveryFailureReason">Nem sikerült kézbesíteni – ok:</label>
+            <select id="deliveryFailureReason" class="status-select">
+              <option value="Nem volt otthon">Nem volt otthon</option>
+              <option value="Rossz cím">Rossz cím</option>
+              <option value="Nem elérhető">Nem elérhető</option>
+              <option value="Egyéb">Egyéb</option>
+            </select>
+          </div>
+
+          <div class="map-card">
+            <div class="map-card-header">
+              <div class="eyebrow">TÉRKÉP</div>
+              <span id="routeStateText">Várakozás</span>
+            </div>
+            <div id="courierMap" aria-label="Futár útvonal térkép"></div>
           </div>
         </section>
       </main>
